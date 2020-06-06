@@ -4,3 +4,5 @@ index:
 #cart:
 #    path: cart/
 #    controller: App\Controller\CartController::index
+login:
+    path: /login

@@ -33,7 +33,7 @@
                                                                                         <td>{{ item }}</td>
                                                                                         {% for products in product %}
                                                                                                 {% if products.id == key %}
-                                                                                                        <td>{{ products.id }}</td>
+                                                                                                        <td>{{ products.productName }}</td>
                                                                                                         <td>{{ products.productPrice }}</td>
                                                                                                         {#                                    {% if (seizoen.beginDatum = date()) and (seizoen.eindDatum < date("+1 day +1 week") ) %}#}
                                                                                                         <td>€{{ (products.productPrice * item) | number_format(2) }}</td>
@@ -51,7 +51,7 @@
                                         {% endif %}
                                 </ul>
                                 <H4 class="right">Total in Cart = €{{ total | number_format(2) }}</H4>
-                                <a href="/"><button type="button" class="btn btn-info col-lg-2 right">Go on shopping!</button></a>
+                                <a href="/shop"><button type="button" class="btn btn-info col-lg-2 right">Go on shopping!</button></a>
                                 <a href="{{ path('checkout') }}"><button type="button" class="btn btn-success col-lg-2 pull-right">Checkout!</button></a>
 
                         </div>

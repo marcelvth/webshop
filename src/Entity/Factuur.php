@@ -30,18 +30,13 @@ class Factuur
     private $datum;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $regels = [];
-
-    /**
      * @ORM\OneToMany(targetEntity=Regel::class, mappedBy="factuurId")
      */
-    private $factuurRegels;
+    private $regels;
 
     public function __construct()
     {
-        $this->factuurRegels = new ArrayCollection();
+        $this->regels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,46 +68,36 @@ class Factuur
         return $this;
     }
 
-    public function getRegels(): ?array
+    /**
+     * @return Collection|Regel[]
+     */
+    public function getRegels(): Collection
     {
         return $this->regels;
     }
 
-    public function setRegels(array $regels): self
+    public function addRegel(Regel $regel): self
     {
-        $this->regels = $regels;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Regel[]
-     */
-    public function getFactuurRegels(): Collection
-    {
-        return $this->factuurRegels;
-    }
-
-    public function addFactuurRegel(Regel $factuurRegel): self
-    {
-        if (!$this->factuurRegels->contains($factuurRegel)) {
-            $this->factuurRegels[] = $factuurRegel;
-            $factuurRegel->setFactuurId($this);
+        if (!$this->regels->contains($regel)) {
+            $this->regels[] = $regel;
+            $regel->setFactuurId($this);
         }
 
         return $this;
     }
 
-    public function removeFactuurRegel(Regel $factuurRegel): self
+    public function removeRegel(Regel $regel): self
     {
-        if ($this->factuurRegels->contains($factuurRegel)) {
-            $this->factuurRegels->removeElement($factuurRegel);
+        if ($this->regels->contains($regel)) {
+            $this->regels->removeElement($regel);
             // set the owning side to null (unless already changed)
-            if ($factuurRegel->getFactuurId() === $this) {
-                $factuurRegel->setFactuurId(null);
+            if ($regel->getFactuurId() === $this) {
+                $regel->setFactuurId(null);
             }
         }
 
         return $this;
     }
+
+
 }

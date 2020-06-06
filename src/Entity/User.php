@@ -48,6 +48,11 @@ class User implements UserInterface
      */
     private $factuurs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
     public function __construct()
     {
         $this->factuurs = new ArrayCollection();
@@ -172,5 +177,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getFirstName();
     }
 }

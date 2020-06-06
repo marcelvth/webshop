@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div>
+            <h1><strong>Contact Us</strong></h1>
+            <p>&nbsp;</p>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <input type="submit" class="btn btn-primary" value="Verzenden" />
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -18,19 +18,20 @@ class Regel
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Factuur::class, inversedBy="factuurRegels")
+     * @ORM\ManyToOne(targetEntity=Factuur::class, inversedBy="regels")
      */
     private $factuurId;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $aantal;
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="regels")
      */
     private $productId;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $aantal;
 
     public function getId(): ?int
     {
@@ -49,6 +50,18 @@ class Regel
         return $this;
     }
 
+    public function getAantal(): ?int
+    {
+        return $this->aantal;
+    }
+
+    public function setAantal(int $aantal): self
+    {
+        $this->aantal = $aantal;
+
+        return $this;
+    }
+
     public function getProductId(): ?Product
     {
         return $this->productId;
@@ -61,15 +74,4 @@ class Regel
         return $this;
     }
 
-    public function getAantal(): ?float
-    {
-        return $this->aantal;
-    }
-
-    public function setAantal(float $aantal): self
-    {
-        $this->aantal = $aantal;
-
-        return $this;
-    }
 }

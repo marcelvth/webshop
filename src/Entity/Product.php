@@ -6,9 +6,12 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ *  * @Vich\Uploadable
  */
 class Product
 {
@@ -35,12 +38,18 @@ class Product
     private $productDescription;
 
     /**
+     * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="productId")
+     */
+    private $productImages;
+
+    /**
      * @ORM\OneToMany(targetEntity=Regel::class, mappedBy="productId")
      */
     private $regels;
 
     public function __construct()
     {
+        $this->productImages = new ArrayCollection();
         $this->regels = new ArrayCollection();
     }
 
@@ -86,6 +95,42 @@ class Product
     }
 
     /**
+     * @return Collection|ProductImage[]
+     */
+    public function getProductImages(): Collection
+    {
+        return $this->productImages;
+    }
+
+    public function addProductImage(ProductImage $productImage): self
+    {
+        if (!$this->productImages->contains($productImage)) {
+            $this->productImages[] = $productImage;
+            $productImage->setProductId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductImage(ProductImage $productImage): self
+    {
+        if ($this->productImages->contains($productImage)) {
+            $this->productImages->removeElement($productImage);
+            // set the owning side to null (unless already changed)
+            if ($productImage->getProductId() === $this) {
+                $productImage->setProductId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getProductName();
+    }
+
+    /**
      * @return Collection|Regel[]
      */
     public function getRegels(): Collection
@@ -115,4 +160,6 @@ class Product
 
         return $this;
     }
+
+
 }

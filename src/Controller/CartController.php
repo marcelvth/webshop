@@ -112,10 +112,10 @@ class CartController extends AbstractController
             $userAdress = new User();
             $userAdress->setId($this->getUser()->getId());
         }
-
+        $user = $UserRepository->findOneBy(array('id' => $this->getUser()->getId()));
         $factuur = new Factuur();
         $factuur->setDatum(new \DateTime("now"));
-        $factuur->setKlantId($this->getUser());
+        $factuur->setKlantId($user);
 
         //var_dump($cart);
         // vullen regels met orderregels.
@@ -140,7 +140,6 @@ class CartController extends AbstractController
                 $em->flush();
             }
         }
-
 
         $session->clear();
         return $this->redirectToRoute('cart');

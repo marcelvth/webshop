@@ -12,6 +12,7 @@
                 <th>ProductName</th>
                 <th>ProductPrice</th>
                 <th>ProductDescription</th>
+                <th>ProductImage</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,13 @@
                 <td>{{ product.productName }}</td>
                 <td>{{ product.productPrice }}</td>
                 <td>{{ product.productDescription }}</td>
+                <td class="d-none d-md-block">
+                    {% for image in images %}
+                        {% if product.id == image.id %}
+                            <img style="height: 50px"  src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ product.productName }}" />
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
