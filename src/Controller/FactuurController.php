@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Factuur;
 use App\Form\FactuurType;
 use App\Repository\FactuurRepository;
-use App\Repository\RegelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,19 +61,19 @@ class FactuurController extends AbstractController
     }
 
     /**
-     * @Route("/pdf/{id}", name="factuur_showPDF", methods={"GET"})
+     * @Route("/pdf/{id}", name="factuur_pdf", methods={"GET"})
      */
-    public function showPDF(Factuur $factuur): Response
+    public function showPDF(Factuur $factuur)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('defaultFont', 'Arial' );
 
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('factuur/pdf.html.twig', [
+        $html = $this->renderView('/factuur/pdf.html.twig', [
             'factuur' => $factuur
         ]);
 
@@ -88,9 +87,11 @@ class FactuurController extends AbstractController
         $dompdf->render();
 
         // Output the generated PDF to Browser (inline view)
-        $dompdf->stream("fuctuur.pdf", [
+        $dompdf->stream("factuur.pdf", [
             "Attachment" => false
         ]);
+
+
     }
 
     /**
