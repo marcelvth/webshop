@@ -73,7 +73,7 @@ class FactuurController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('/factuur/pdf.html.twig', [
+        $html = $this->renderView('factuur/pdf.html.twig', [
             'factuur' => $factuur
         ]);
 
