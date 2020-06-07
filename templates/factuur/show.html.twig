@@ -12,8 +12,39 @@
                 <td>{{ factuur.id }}</td>
             </tr>
             <tr>
+                <th>Naam</th>
+                <td>{{ factuur.klantId.firstName }}</td>
+            </tr>
+            <tr>
                 <th>Datum</th>
                 <td>{{ factuur.datum ? factuur.datum|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Regels</th>
+                <td>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Aantal</th>
+                            <th>Omschrijving</th>
+                            <th>Prijs</th>
+                        </tr>
+                        </thead>
+                        {% for regels in factuur.regels %}
+                            <tr>
+                                <td>{{ regels.id }}</td>
+                                <td>{{ regels.aantal }}</td>
+                                <td>{{ regels.productId.productDescription }}</td>
+                                <td>{{ regels.productId.productPrice }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">no records found</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
             </tr>
         </tbody>
     </table>
