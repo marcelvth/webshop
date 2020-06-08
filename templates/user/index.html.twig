@@ -3,18 +3,22 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>User index</h1>
+<div class="table-responsive">
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>IsVerified</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Role</th>
+            <th>Password</th>
+            <th>IsVerified</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
@@ -22,6 +26,7 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.rollen }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>
@@ -40,6 +45,12 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+
+                <a href="{{ path('user_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

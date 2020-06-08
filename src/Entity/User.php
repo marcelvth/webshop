@@ -53,6 +53,11 @@ class User implements UserInterface
      */
     private $firstName;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Rollen::class, inversedBy="users")
+     */
+    private $rollen;
+
     public function __construct()
     {
         $this->factuurs = new ArrayCollection();
@@ -193,5 +198,17 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getFirstName();
+    }
+
+    public function getRollen(): ?Rollen
+    {
+        return $this->rollen;
+    }
+
+    public function setRollen(?Rollen $rollen): self
+    {
+        $this->rollen = $rollen;
+
+        return $this;
     }
 }

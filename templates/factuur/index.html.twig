@@ -23,12 +23,12 @@
                 <td>
                     <a href="{{ path('factuur_show', {'id': factuur.id}) }}">show</a>
                     <a href="{{ path('factuur_edit', {'id': factuur.id}) }}">edit</a>
-                    <a href="{{ path('factuur_showPDF', {'id': factuur.id}) }}">pdf</a>
+                    <a href="{{ path('factuur_pdf', {'id': factuur.id}) }}">pdf</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

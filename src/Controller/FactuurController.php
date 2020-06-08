@@ -6,6 +6,7 @@ use App\Entity\Factuur;
 use App\Form\FactuurType;
 use App\Repository\FactuurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,6 +66,7 @@ class FactuurController extends AbstractController
      */
     public function showPDF(Factuur $factuur)
     {
+
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial' );
@@ -90,7 +92,6 @@ class FactuurController extends AbstractController
         $dompdf->stream("factuur.pdf", [
             "Attachment" => false
         ]);
-
 
     }
 
