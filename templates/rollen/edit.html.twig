@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Rollen{% endblock %}
+
+{% block body %}
+    <h1>Edit Rollen</h1>
+
+    {{ include('rollen/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rollen_index') }}">back to list</a>
+
+    {{ include('rollen/_delete_form.html.twig') }}
+{% endblock %}

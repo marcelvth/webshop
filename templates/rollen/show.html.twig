@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rollen{% endblock %}
+
+{% block body %}
+    <h1>Rollen</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rollen.id }}</td>
+            </tr>
+            <tr>
+                <th>Naam</th>
+                <td>{{ rollen.naam }}</td>
+            </tr>
+            <tr>
+                <th>Omschrijving</th>
+                <td>{{ rollen.omschrijving }}</td>
+            </tr>
+            <tr>
+                <th>Waarde</th>
+                <td>{{ rollen.waarde }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rollen_index') }}">back to list</a>
+
+    <a href="{{ path('rollen_edit', {'id': rollen.id}) }}">edit</a>
+
+    {{ include('rollen/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rollen index{% endblock %}
+
+{% block body %}
+    <h1>Rollen index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Naam</th>
+                <th>Omschrijving</th>
+                <th>Waarde</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rollen in rollens %}
+            <tr>
+                <td>{{ rollen.id }}</td>
+                <td>{{ rollen.naam }}</td>
+                <td>{{ rollen.omschrijving }}</td>
+                <td>{{ rollen.waarde }}</td>
+                <td>
+                    <a href="{{ path('rollen_show', {'id': rollen.id}) }}">show</a>
+                    <a href="{{ path('rollen_edit', {'id': rollen.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rollen_new') }}">Create new</a>
+{% endblock %}
